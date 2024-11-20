@@ -1,0 +1,38 @@
+gfcli:
+  gen:
+    dao:
+      link: mysql:user:password@tcp(address:port)/database # 数据库配置
+      group: default                                       # 数据库分组
+      tables:                                              # 生成指定数据表的目标文件，多个数据表用逗号分割，注：为空则生成所有数据表的目标文件
+      tablesEx:                                            # 生成排除数据表的目标文件，多个数据表用逗号分割
+      removePrefix:                                        # 移除数据表前缀
+      removeFieldPrefix:                                   # 移除数据表字段前缀
+      typeMapping:                                         # 数据表字段类型映射
+      path: internal                                       # 目标文件的路径
+      daoPath: dao                                         # 目标文件dao的路径
+      doPath: dao/do                                       # 目标文件do的路径
+      entityPath: dao/po                                   # 目标文件entity的路径
+      tplDaoIndexPath: internal/dao/tpl/index.tpl          # 目标文件dao index模板的路径
+      tplDaoInternalPath:                                  # 目标文件dao internal模板的路径
+      tplDaoDoPath:                                        # 目标文件dao do模板的路径
+      tplDaoEntityPath:                                    # 目标文件dao entity模板的路径
+      prefix:                                              # 目标文件的前缀
+      importPrefix:                                        # 引入文件的包前缀
+      withTime: false                                      # 是否添加文件生成时间
+      stdTime: false                                       # 是否使用原生时间类型
+      gJsonSupport: false                                  # 是否使用*gjson.Json类型
+      noJsonTag: false                                     # 是否不添加json标签
+      jsonCase: Snake                                      # json标签的命名方式
+      descriptionTag: false                                # 是否添加description标签
+      noModelComment: false                                # 是否不添加注释
+      overwriteDao: false                                  # 是否覆盖目标文件
+      clear: false                                         # 清理目标文件
+    service:
+      srcFolder: internal/logic                            # 源文件的路径
+      dstFolder: internal/service                          # 目标文件的路径
+      dstFileNameCase: Snake                               # 目标文件的命名规则
+      watchFile:                                           # 监控的文件
+      stPattern: ^([a-zA-Z]\w+)Logic$                      # 结构体的命名规则
+      packages:                                            # 只生成指定包下的目标文件
+      importPrefix:                                        # 引入文件的包前缀
+      clear: false                                         # 清理目标文件
