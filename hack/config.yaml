@@ -3,8 +3,8 @@ gfcli:
     dao:
       link: mysql:user:password@tcp(address:port)/database # 数据库配置
       group: default                                       # 数据库分组
-      tables:                                              # 生成指定数据表的目标文件，多个数据表用逗号分割，注：为空则生成所有数据表的目标文件
-      tablesEx:                                            # 生成排除数据表的目标文件，多个数据表用逗号分割
+      tables:                                              # 生成指定数据表的目标文件，多个数据表用逗号分隔，注：为空则生成所有数据表的目标文件
+      tablesEx:                                            # 生成排除数据表的目标文件，多个数据表用逗号分隔
       removePrefix:                                        # 移除数据表前缀
       removeFieldPrefix:                                   # 移除数据表字段前缀
       typeMapping:                                         # 数据表字段类型映射
@@ -36,3 +36,18 @@ gfcli:
       packages:                                            # 只生成指定包下的目标文件
       importPrefix:                                        # 引入文件的包前缀
       clear: false                                         # 清理目标文件
+  build:
+    name: websocket                                        # 编译的可执行文件名称
+    version: 1.0.0                                         # 程序版本
+    arch: arm64                                            # 编译架构，多个以逗号分隔，all表示编译所有支持架构
+    system: darwin                                         # 编译平台，多个以逗号分隔，all表示编译所有支持平台
+    output:                                                # 编译的可执行文件路径，指定该参数后name和path失效
+    path: build                                            # 编译的可执行文件目录
+    extra:                                                 # 额外的编译参数，会直接传递给go build命令
+    mod: none                                              # go build -mod编译选项
+    cgo: 0                                                 # 是否开启cgo
+    varMap:                                                # 自定义的内置变量键值对
+    packSrc: config                                        # 资源打包的目录，多个以,号分隔
+    packDst: build/data.go                                 # 资源打包文件路径，编译结束自动删除
+    exitWhenError: true                                    # 发生错误时是否退出编译
+    dumpEnv:                                               # 是否打印当前编译环境的环境变量信息
