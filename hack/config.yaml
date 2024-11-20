@@ -50,4 +50,4 @@ gfcli:
     packSrc: config                                        # 资源打包的目录，多个以,号分隔
     packDst: build/data.go                                 # 资源打包文件路径，编译结束自动删除
     exitWhenError: true                                    # 发生错误时是否退出编译
-    dumpEnv:                                               # 是否打印当前编译环境的环境变量信息
+    dumpEnv: false                                         # 是否打印当前编译环境的环境变量信息
