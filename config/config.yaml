@@ -65,11 +65,14 @@ server:
   openapiPath:                         # openapi接口文档地址
   swaggerPath:                         # swagger地址
 
+  # 平滑重启
+  graceful: false                      # 是否开启平滑重启特性，开启时将会在本地增加10000的本地TCP端口用于进程间通信。默认false
+  gracefulTimeout: 2                   # 父进程在平滑重启后多少秒退出，若请求耗时大于该值，可能会导致请求中断。默认2秒
+  gracefulShutdownTimeout: 5           # 关闭Server时如果存在正在执行的HTTP请求，Server等待多少秒才执行强行关闭。默认5秒
+
   # 其他配置
   clientMaxBodySize: 810241024         # 客户端最大Body上传限制大小，影响文件上传大小。默认为810241024 byte
   formParsingMemory: 1048576           # 解析表单时的缓冲区大小，一般不需要配置。默认为1048576 byte
   nameToUriType: 3                     # 路由注册中使用对象注册时的路由生成规则。默认为0
   routeOverWrite: false                # 当遇到重复路由注册时是否强制覆盖。默认为false，表示重复路由存在时将会在启动时报错退出
   dumpRouterMap: true                  # 是否在server启动时打印所有的路由列表。默认为true
-  graceful: false                      # 是否开启平滑重启特性，开启时将会在本地增加10000的本地TCP端口用于进程间通信。默认false
-  gracefulTimeout: 2                   # 父进程在平滑重启后多少秒退出，若请求耗时大于该值，可能会导致请求中断。默认2秒
