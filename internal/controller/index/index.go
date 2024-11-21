@@ -14,5 +14,11 @@ func init() {
 type indexController struct{}
 
 func (*indexController) Get(request *ghttp.Request) {
+	defer func() {
+		if exception := recover(); exception != nil {
+			g.Log().Error(request.GetCtx(), exception)
+		}
+	}()
+
 	websocket.Connect(request)
 }
