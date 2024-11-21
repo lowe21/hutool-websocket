@@ -75,17 +75,6 @@ func Message(handler string, args ...any) []byte {
 		}
 	}
 
-	if data != nil {
-		switch value := data.(type) {
-		case []any:
-			data = gconv.Maps(data)
-		case []byte:
-			data, _ = gjson.Decode(value, gjson.Options{})
-		default:
-			data = gconv.Map(data)
-		}
-	}
-
 	return gjson.MustEncode(&Output{
 		Handler: handler,
 		Code:    gstr.CaseSnakeScreaming(code),
