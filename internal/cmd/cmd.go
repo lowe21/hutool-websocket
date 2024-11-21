@@ -16,12 +16,16 @@ var Main = gcmd.Command{
 	Func: func(context.Context, *gcmd.Parser) error {
 		go func() {
 			for {
-				<-time.After(100 * time.Millisecond)
-				data := make([]map[string]any, 0, 10)
+				<-time.After(1000 * time.Millisecond)
+				data := make([]map[string]int, 0, 10)
 				for i := 0; i < 10; i++ {
-					data = append(data, map[string]any{"x": i, "y": grand.Intn(100)})
+					data = append(data, map[string]int{"x": i, "y": grand.Intn(100)})
 				}
 				websocket.Notice(websocket.Message("data", data))
+
+				websocket.Notice(websocket.Message("result", map[string]int{
+					"result": grand.N(-1, 1),
+				}))
 			}
 		}()
 
