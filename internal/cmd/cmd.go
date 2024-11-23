@@ -13,10 +13,11 @@ import (
 )
 
 var Main = gcmd.Command{
-	Func: func(context.Context, *gcmd.Parser) error {
+	Func: func(context.Context, *gcmd.Parser) (err error) {
 		go func() {
 			for {
-				<-time.After(1000 * time.Millisecond)
+				<-time.After(time.Second)
+
 				data := make([]map[string]int, 0, 10)
 				for i := 0; i < 10; i++ {
 					data = append(data, map[string]int{"x": i, "y": grand.Intn(100)})
@@ -31,8 +32,20 @@ var Main = gcmd.Command{
 
 		server := g.Server()
 		server.Use(ghttp.MiddlewareCORS)
-		server.Run()
+		if err = server.Start(); err != nil {
+			return
+		}
 
-		return nil
+		web := g.Server("web")
+		web.SetPort(8188)
+		web.SetServerRoot("/web")
+		web.SetDumpRouterMap(false)
+		if err = web.Start(); err != nil {
+			return
+		}
+
+		g.Wait()
+
+		return
 	},
 }
